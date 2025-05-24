@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 mongoose.connect(process.env.MONGO_URL)
+
 .then(()=>{
     console.log("Database is connected");
 }).catch((err)=>{
@@ -12,4 +13,4 @@ mongoose.connect(process.env.MONGO_URL)
 const app = express();
 app.listen(3000, () => {
     console.log("Server is running in port 3000")
-})
+});
