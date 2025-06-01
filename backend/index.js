@@ -13,9 +13,22 @@ mongoose.connect(process.env.MONGO_URL)
 })
 const app = express( );
 //for allowing json oject in req body
-app.use(express.json)
-app.listen(5000, () => {
+app.use(express.json())
+app.listen(3000, () => {
     console.log("Server is running in port 3000")
 });
 
 app.use("/api/auth", authRoutes)
+app.use((err, req, res, next)=>{
+    const statusCode=err.statusCode || 500;
+
+    const message=err.message || "Internal Sever Error";
+
+    res.status(statusCode).json({
+        success:false,
+        statusCode,
+        message
+    })
+})
+
+
